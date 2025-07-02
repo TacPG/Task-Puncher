@@ -331,4 +331,10 @@ function playTypewriterClick() {
     clickOsc.stop(now + 0.03);
 }
 
+window.addEventListener('click', () => {
+  if (audioContext && audioContext.state === 'suspended') {
+    audioContext.resume();
+  }
+});
+
 
