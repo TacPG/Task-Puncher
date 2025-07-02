@@ -8,6 +8,25 @@
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#00ff41" />
 </head>
+  
+<!-- Firebase App (the core Firebase SDK) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyBBliu_dUtSZqnEymdHuTUVQUTLMWsX_g",
+    authDomain: "task-puncher.firebaseapp.com",
+    projectId: "task-puncher",
+    storageBucket: "task-puncher.appspot.com",
+    messagingSenderId: "472343872847",
+    appId: "1:472343872847:web:92ea247f88e009237cf13a"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+</script>
+
 <body>
   <div class="container">
     <header>
