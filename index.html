@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task Puncher</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#00ff41" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>TASK PUNCHER</h1>
+      <div class="punch-counter">PUNCHED: <span id="counter">0</span></div>
+    </header>
+    <div class="input-area">
+      <input type="text" id="task-input" placeholder="Enter a new task..." />
+      <button id="add-task-btn">+</button>
+    </div>
+    <ul id="task-list"></ul>
+    <div class="action-area">
+      <button id="done-btn">DONE</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
