@@ -247,6 +247,7 @@ function addTask() {
     createTask(taskText);
     taskInput.value = '';
     taskInput.focus();
+    addTaskToFirestore(taskText);
 }
 
 addTaskBtn.addEventListener('click', addTask);
@@ -276,7 +277,11 @@ doneBtn.addEventListener('click', (e) => {
 
         selectedTask.classList.add('punched', 'punched-animation');
         selectedTask.classList.remove('selected');
-        setTimeout(() => selectedTask.remove(), 500);
+        setTimeout(() => {
+  selectedTask.remove();
+  deleteTaskFromFirestore(selectedTask.textContent);
+}, 500);
+
 
         punchCounter++;
         counterSpan.textContent = punchCounter;
@@ -336,4 +341,36 @@ window.addEventListener('click', () => {
     audioContext.resume();
   }
 });
+
+function addTaskToFirestore(taskText) {
+  db.collection("tasks").add({
+    text: taskText,
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  });
+}
+
+function deleteTaskFromFirestore(taskText) {
+  db.collection("tasks")
+    .where("text", "==", taskText)
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        doc.ref.delete();
+      });
+    });
+}
+
+function loadTasksFromFirestore() {
+  db.collection("tasks")
+    .orderBy("createdAt")
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        createTask(data.text);  // すでにあるcreateTask関数を使う
+      });
+    });
+}
+
+loadTasksFromFirestore();
 
